@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+    --base-color: #464347;
+    --contrast-color: darkgrey;
+    --svetla-krem: #e0ddcf;
+    /* boje za generator */
+    --boja-teksta: darkgrey;
+    --boja-pozadine: rgb(169, 169, 169);
+    --boja-oblika: #59555a;
+
+    /* podesavanja za sjenku na elementu */
+    --sjenka-x: 5px;
+    --sjenka-y: 5px;
+    --sjenka-blur: 10px;
+    --sjenka-spread: 0px;
+    --sjenka-boja: black;
+}
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--base-color);
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.drop-shadow-tool {
+    height: 100vh;
+}
+
+.drop-shadow-tool-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
+.drop-shadow-tool-settings-bar {
+    width: 100%;
+    height: 100%;
+    flex-basis: 20%;
+    box-shadow: 1px 0 10px black;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    align-items: center;
+    width: 100%;
+    color: var(--boja-teksta);
+}
+
+.drop-shadow-tool-settings-bar>h1 {
+    font-size: 2em;
+    margin: 1em 0;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.drop-shadow-tool-settings-bar>h1::first-letter {
+    text-transform: capitalize;
+    border: 1px solid;
+    padding: .2em .2em 0 .2em;
+    margin-right: .1em;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 1em;
+}
+
+.settings>h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: .3em;
+}
+
+.settings>h2::first-letter {
+    text-transform: capitalize;
+}
+
+.property {
+    width: 100%;
+    margin: 0.5em 0;
+    margin-left: 0.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    padding: .5em;
+}
+
+.property>label {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.property>label::first-letter {
+    text-transform: capitalize;
+}
+
+.drop-shadow-tool-preview {
+    width: 100%;
+    height: 100%;
+    flex-basis: 80%;
+    background-color: var(--boja-pozadine);
+    box-shadow: inset 0 0 10px black;
+    display: grid;
+    place-content: center;
+    position: relative;
+}
+
+.drop-shadow-tool-preview>h1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 1em;
+    font-size: 2.2em;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--base-color);
+    mix-blend-mode: difference;
+}
+
+#shape {
+    width: 200px;
+    height: 200px;
+    background-color: var(--boja-oblika);
+    box-shadow:
+        var(--sjenka-x) var(--sjenka-y) var(--sjenka-blur) var(--sjenka-spread) var(--sjenka-boja);
+    transition: 500ms;
+    transition-property: border-radius;
+}
+
+.shape-circle {
+    border-radius: 50%;
+}
+
+input[type="number"] {
+    font-size: 1.1em;
+    font-weight: bold;
+    font-style: inherit;
+    color: var(--base-color);
+    padding: 0.3em 0.5em;
+    background-color: var(--boja-teksta);
+    border-radius: .5em;
+}
+
+/* gadja tastere unutar number input taga */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+}
+
+
+
+input[type="color"] {
+    background-color: var(--boja-teksta);
+}
+
+input[type="range"] {
+    background-color: var(--base-color);
+    appearance: none;
+}
+
+/* ovaj pseudo selektor je za sve pretrazivace osim firefox-a    */
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 1.1em;
+    cursor: pointer;
+    background-color: var(--boja-teksta);
+    border-radius: 1em;
+    box-shadow: inset 0 0 4px black;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 1em;
+    height: 1em;
+    border-radius: 1em;
+    background-color: rgba(89, 89, 89, 1);
+    margin: .05em 0;
+    box-shadow: 0 0 2px black;
+}
+
+#shape-shape {
+    appearance: none;
+    height: 1.5em;
+    width: 3em;
+    border-radius: 1em;
+    background-color: var(--boja-teksta);
+    position: relative;
+    box-shadow: inset 0 0 2px black;
+    overflow: hidden;
+}
+
+#shape-shape::before {
+    content: '';
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 50%;
+    background-color: rgba(89, 89, 89, 1);
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: 500ms;
+    transition-property: transform;
+    box-shadow: 0 0 2px black;
+}
+
+#shape-shape:checked::before {
+    /* background-color: rebeccapurple; */
+    transform: translateX(100%);
+}
